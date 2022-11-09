@@ -8,30 +8,51 @@
 	<title>Tarea2</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
+<!--
+Tarea Aplicación CRUD
+Jaffa Friedman
+-->
 <body>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> 
- 
-    <main>
-        <section id="ingreso">
-            <div class="container mb-4">
-                <div class="mt-2">
-                   <label for="tarea" class="form-label"></label>Tarea</label>
-                  <input  class="form-control" id="tarea" placeholder="ingrese la tarea"> </input>
-                 </div>
-                 <div class="mt-">
-                    <label for="descrpcion" class="form-label">Descripción</label>
-                    <textarea class="form-control" id="descrpcion" placeholder="ingrese la descrpción de la tarea" rows="3"></textarea>
-                </div>
-                <div class="aling-end mt-4 mb-4" >
-                    <button id="btn-create" type="button" class="btn btn-primary .bg-gradient">Agregar</button>
-                </div>
-            </div>
-        </section>
-        <section id="listado">
-            <div class="container" id="despliegue">
-            </section>
+   <header class="relative">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <!--Agenda --> 
+              <li class="nav-item dropdown">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Aplicación de Registro de Tareas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Por si quiero poner algo</a></li>
+                         </ul>
+                    </li>
+            </ul>
         </div>
-     
+    </nav>
+   </header>
+    <main>
+
+        <section id="listar" class="container m-4">
+            <h3>Sección listar</h3>
+        </section>
+        <section id="boton" class="container m-4">
+            <h3>Sección boton</h3>
+        </section>
+        <section id="ingresar" class="container m-4">
+            <h3>Sección ingresar</h3>
+        </section>
+        <section id="modificar" class="container m-4">
+            <h3>Sección modificar</h3>
+        </section>
+        <section id="eliminar" class="container m-4">
+            <h3>Sección eliminar</h3>
+        </section>
     </main>
  
    <script src="main.js">  </script>   
