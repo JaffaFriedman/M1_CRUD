@@ -49,7 +49,6 @@ function listarTareaFormulario(tarea,idx) {
                             </div>
                       </div>`
     listar.appendChild(tareaE)
-    console.log(tareaE)
    }
 
    function botonAgregar() {
@@ -66,18 +65,14 @@ function listarTareaFormulario(tarea,idx) {
 
    function listarTareas()
    {
+ 
     borrarSeccion('listar')
     titulos()
     tareas.forEach((v,idx)=>listarTareaFormulario(v,idx))
     botonAgregar()
    }
 
-   function modificarTareaFormulario(idx ) {
-    
-    
-     
-    console.log(idx)
-    
+   function modificarTareaFormulario(idx ) {  
     limpiar()
     const tareaE = document.createElement("div")
     tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
@@ -113,18 +108,13 @@ function listarTareaFormulario(tarea,idx) {
    function modificarTarea(idx){ 
     const tarea=document.querySelector("#tareaM")
     const descripcion=document.querySelector("#descripcionM")
-    console.log(tarea)
-    console.log(descripcion)
     tareas[idx].tarea=tarea.value
     tareas[idx].descripcion=descripcion.value
-    console.log(tareas)
     limpiar() 
     listarTareas()
    }
 
    function eliminarTareaFormulario(idx) { 
-    console.log(idx)
-  
     limpiar() 
     const tareaE = document.createElement("div")
     tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
@@ -200,11 +190,12 @@ function listarTareaFormulario(tarea,idx) {
 
    function borrarSeccion(seccion){
     const borrar=document.getElementById(seccion) 
-    borrar.innerHTML =`<div class="container m-4">
-                       </div>` 
+    borrar.innerHTML = "" /*`<div class="container m-4">
+                       </div>`*/ 
    }
 
    function limpiar() {
+    borrarSeccion('listar')
     borrarSeccion('boton')
     borrarSeccion('eliminar')
     borrarSeccion('modificar')
@@ -214,11 +205,11 @@ function listarTareaFormulario(tarea,idx) {
    function inicio()  {
    const cantidadTareas=tareas.length
    limpiar()
-   borrarSeccion('listar')
    if (cantidadTareas===0) 
     { ingresarTareaFormulario() }
    else
-     {listarTareas()}
+     {   
+        listarTareas()}
    }
 
    window.onload = function() { 
