@@ -94,7 +94,7 @@ function formListar(tarea,idx) {
         tareas[idx].tarea=tarea.value
         tareas[idx].descripcion=descripcion.value
         grabarStorage()
-        limpiar() 
+        limpiar()
         listarTareas()
    }
 
@@ -128,35 +128,35 @@ function formListar(tarea,idx) {
    function eliminarTarea(idx){
         tareas.splice(idx,1)
         grabarStorage()
-        inicio()  
+        inicio()
     }
 
    function formIngreso() {
-    limpiar()
-    const tareaE = document.createElement("div")
-    tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
-                            <div class="card-header bg-secondary text-bg-secondary">Ingresar</div>
-                            <div class="card-body">
-                            <form id="formIngresar">
-                                <div class="mt-2" id="tarea">
-                                    <label for="tarea" class="form-label fw-bold">Tarea</label>
-                                    <input  class="form-control" type="text" id="tareaI"  name="tareaI" placeholder="ingrese la tarea" > </input>
-                                </div>
-                                <div class="mt-2" id="descripcion" >
-                                    <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                                    <input  class="form-control" type="text" id="descripcionI" name="descripcionI" placeholder="ingrese la descrpción de la tarea"  rows="3" > </input>
-                                </div>
-                                <div class="aling-end mt-4 mb-4" >
-                                    <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                    onclick="inicio()">Cancelar</button>
-                                    <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
-                                    onclick="ingresarTarea()">Agregar</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>`
-    ingresar.appendChild(tareaE)
-    borrarSeccion("boton")
+            limpiar()
+            const tareaE = document.createElement("div")
+            tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
+                                    <div class="card-header bg-secondary text-bg-secondary">Ingresar</div>
+                                    <div class="card-body">
+                                    <form id="formIngresar">
+                                        <div class="mt-2" id="tarea">
+                                            <label for="tarea" class="form-label fw-bold">Tarea</label>
+                                            <input  class="form-control" type="text" id="tareaI"  name="tareaI" placeholder="ingrese la tarea" > </input>
+                                        </div>
+                                        <div class="mt-2" id="descripcion" >
+                                            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                                            <input  class="form-control" type="text" id="descripcionI" name="descripcionI" placeholder="ingrese la descrpción de la tarea"  rows="3" > </input>
+                                        </div>
+                                        <div class="aling-end mt-4 mb-4" >
+                                            <button id="btn-create" type="button" class="btn btn-outline-secondary" 
+                                            onclick="inicio()">Cancelar</button>
+                                            <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
+                                            onclick="ingresarTarea()">Agregar</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>`
+            ingresar.appendChild(tareaE)
+            borrarSeccion("boton")
    }
  
    function ingresarTarea(){  
@@ -165,7 +165,8 @@ function formListar(tarea,idx) {
         agregarTarea(tarea.value, descripcion.value);
         const tareasJ = JSON.stringify(tareas);
         localStorage.setItem('tareas', tareasJ);
-        inicio()
+        borrarSeccion("ingresar")
+        listarTareas()
    } 
 
    function borrarSeccion(seccion){
@@ -178,7 +179,7 @@ function formListar(tarea,idx) {
         borrarSeccion('boton')
         borrarSeccion('eliminar')
         borrarSeccion('modificar')
-        borrarSeccion('ingresar')
+        borrarSeccion('ingresar') 
    }
 
    function leerStorage()
