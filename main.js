@@ -62,7 +62,7 @@ function formListar(tarea,idx) {
    }
 
    function formModificar(idx ) {  
-    limpiar()
+        limpiar()
         const tareaE = document.createElement("div")
         tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
                             <div class="card-header bg-secondary text-bg-secondary">Modificar</div>
@@ -78,7 +78,7 @@ function formListar(tarea,idx) {
                                     </div>
                                     <div class="aling-end mt-4 mb-4" >
                                         <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                        onclick="inicio()">Cancelar</button>
+                                        onclick="refrescar()">Cancelar</button>
                                         <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
                                         onclick="modificarTarea(${idx})">Actualizar</button>
                                     </div>
@@ -113,7 +113,7 @@ function formListar(tarea,idx) {
                                     </div>
                                     <div class="aling-end mt-4 mb-4" >
                                         <button id="btn-create" type="button" class="btn btn-outline-danger" 
-                                        onclick="inicio()">Cancelar</button>
+                                        onclick="refrescar()">Cancelar</button>
                                         <button id="btn-create" type="button" class="btn btn-danger .bg-gradient" 
                                         onclick="eliminarTarea(${idx})">Confirmar</button>
                                     </div>
@@ -145,7 +145,7 @@ function formListar(tarea,idx) {
                                  </div>
                                  <div class="aling-end mt-4 mb-4" >
                                      <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                     onclick="inicio()">Cancelar</button>
+                                     onclick="refrescar()">Cancelar</button>
                                      <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
                                      onclick="ingresarTarea()">Agregar</button>
                                  </div>
@@ -160,9 +160,7 @@ function formListar(tarea,idx) {
      const tarea=document.querySelector("#tareaI")
      const descripcion=document.querySelector("#descripcionI")
      agregarTarea(tarea.value, descripcion.value);
-     const tareasJ = JSON.stringify(tareas);
-     localStorage.setItem('tareas', tareasJ);
-     refrescar()
+     grabarStorage()
 } 
 
    function borrarSeccion(seccion){
@@ -189,7 +187,7 @@ function formListar(tarea,idx) {
    {
         const tareasJ = JSON.stringify(tareas);
         localStorage.setItem('tareas', tareasJ);
-       refrescar()
+        refrescar()
    }
    
    function refrescar()  {
