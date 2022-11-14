@@ -3,16 +3,17 @@ Tarea Aplicación CRUD
 Jaffa Friedman
 */
 let tareas=[]
-
+ 
 function agregarTarea(tarea,descripcion) {
+   if (tareas===null) tareas=[]
     tarea ={ 
         tarea: tarea,
         descripcion: descripcion, }
         tareas.push(tarea)
-        grabarStorage()
 }
 
 function  titulos() {
+    limpiar()
     const tareaE = document.createElement("div")
     tareaE.innerHTML = `<div class="border rounded-top bg-secondary text-bg-secondary fw-bold">
                             <div class="container row " id="lista">
@@ -55,14 +56,13 @@ function formListar(tarea,idx) {
    }
 
    function listarTareas() {  
-            borrarSeccion('listar')
             titulos()
             tareas.forEach((v,idx)=>formListar(v,idx))
             botonAgregar()
    }
 
    function formModificar(idx ) {  
-        limpiar()
+    limpiar()
         const tareaE = document.createElement("div")
         tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
                             <div class="card-header bg-secondary text-bg-secondary">Modificar</div>
@@ -94,12 +94,10 @@ function formListar(tarea,idx) {
         tareas[idx].tarea=tarea.value
         tareas[idx].descripcion=descripcion.value
         grabarStorage()
-        limpiar()
-        listarTareas()
    }
 
    function formEliminar(idx) { 
-    limpiar() 
+    limpiar()
     const tareaE = document.createElement("div")
     tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
                             <div class="card-header bg-secondary text-bg-secondary">Eliminar</div>
@@ -128,46 +126,44 @@ function formListar(tarea,idx) {
    function eliminarTarea(idx){
         tareas.splice(idx,1)
         grabarStorage()
-        inicio()
     }
 
    function formIngreso() {
-            limpiar()
-            const tareaE = document.createElement("div")
-            tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
-                                    <div class="card-header bg-secondary text-bg-secondary">Ingresar</div>
-                                    <div class="card-body">
-                                    <form id="formIngresar">
-                                        <div class="mt-2" id="tarea">
-                                            <label for="tarea" class="form-label fw-bold">Tarea</label>
-                                            <input  class="form-control" type="text" id="tareaI"  name="tareaI" placeholder="ingrese la tarea" > </input>
-                                        </div>
-                                        <div class="mt-2" id="descripcion" >
-                                            <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                                            <input  class="form-control" type="text" id="descripcionI" name="descripcionI" placeholder="ingrese la descrpción de la tarea"  rows="3" > </input>
-                                        </div>
-                                        <div class="aling-end mt-4 mb-4" >
-                                            <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                            onclick="inicio()">Cancelar</button>
-                                            <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
-                                            onclick="ingresarTarea()">Agregar</button>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>`
-            ingresar.appendChild(tareaE)
-            borrarSeccion("boton")
+     limpiar()
+     const tareaE = document.createElement("div")
+     tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
+                             <div class="card-header bg-secondary text-bg-secondary">Ingresar</div>
+                             <div class="card-body">
+                             <form id="formIngresar">
+                                 <div class="mt-2" id="tarea">
+                                     <label for="tarea" class="form-label fw-bold">Tarea</label>
+                                     <input  class="form-control" type="text" id="tareaI"  name="tareaI" placeholder="ingrese la tarea" > </input>
+                                 </div>
+                                 <div class="mt-2" id="descripcion" >
+                                     <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                                     <input  class="form-control" type="text" id="descripcionI" name="descripcionI" placeholder="ingrese la descrpción de la tarea"  rows="3" > </input>
+                                 </div>
+                                 <div class="aling-end mt-4 mb-4" >
+                                     <button id="btn-create" type="button" class="btn btn-outline-secondary" 
+                                     onclick="inicio()">Cancelar</button>
+                                     <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
+                                     onclick="ingresarTarea()">Agregar</button>
+                                 </div>
+                                 </form>
+                             </div>
+                         </div>`
+     ingresar.appendChild(tareaE)
    }
  
+ 
    function ingresarTarea(){  
-        const tarea=document.querySelector("#tareaI")
-        const descripcion=document.querySelector("#descripcionI")
-        agregarTarea(tarea.value, descripcion.value);
-        const tareasJ = JSON.stringify(tareas);
-        localStorage.setItem('tareas', tareasJ);
-        borrarSeccion("ingresar")
-        listarTareas()
-   } 
+     const tarea=document.querySelector("#tareaI")
+     const descripcion=document.querySelector("#descripcionI")
+     agregarTarea(tarea.value, descripcion.value);
+     const tareasJ = JSON.stringify(tareas);
+     localStorage.setItem('tareas', tareasJ);
+     refrescar()
+} 
 
    function borrarSeccion(seccion){
         const borrar=document.getElementById(seccion) 
@@ -180,29 +176,33 @@ function formListar(tarea,idx) {
         borrarSeccion('eliminar')
         borrarSeccion('modificar')
         borrarSeccion('ingresar') 
-   }
+    }  
 
    function leerStorage()
-   {   const tareasJ = localStorage.getItem('tareas');
-       tareas=JSON.parse(tareasJ)
+
+   {   
+       const tareasJ = localStorage.getItem('tareas');
+        tareas=JSON.parse(tareasJ)      
    }
 
    function grabarStorage()
    {
         const tareasJ = JSON.stringify(tareas);
         localStorage.setItem('tareas', tareasJ);
+       refrescar()
    }
    
-   function inicio()  {
-        leerStorage()
-        const cantidadTareas=tareas.length
-        limpiar()
-        if (cantidadTareas===0) 
-            formIngreso()
-        else
-            listarTareas()
+   function refrescar()  {
+        leerStorage() 
+        if (tareas===null)  //cuando no ha sido grabado nunca el el Storage 
+        {   
+            titulos()
+            botonAgregar() 
+        }
+        else listarTareas()
    }
 
-   window.onload = function() { 
-        inicio() 
-   }
+   window.onload = function() {
+    refrescar()
+  }
+
