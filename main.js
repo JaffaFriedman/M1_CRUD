@@ -18,11 +18,11 @@ function  titulos() {
     limpiar()
     const bloque = document.createElement("div")
     bloque.innerHTML = `<div class="border rounded-top bg-secondary text-bg-secondary fw-bold">
-                            <div class="container ml-2 ml-2 row " id="lista">
-                                <div class="col-6" id="nombre">Nombre</div>
-                                <div class="col-2" id="correo">Correo</div>
-                                <div class="col-2" id="fono">Teléfono</div>
-                                <div class="col-2"> </div>   
+                            <div class="container ml-2 ml-2 row row-cols-1  row-cols-xl-4 " id="lista">
+                                <div class="col" id="nombre">Nombre</div>
+                                <div class="col" id="correo">Correo</div>
+                                <div class="col" id="fono">Teléfono</div> 
+                                <div class="col" id="botones"></div> 
                             </div>  
                         </div>`
         listar.appendChild(bloque)
@@ -31,11 +31,11 @@ function  titulos() {
 function formListar(persona,idx) {
     const bloque = document.createElement("div")
     bloque.innerHTML = `<div class="border" id="${idx}">
-                            <div class="container ml-2 row row-cols-3 border-dark" id="lista" >
-                                <div class="col-6" id= "nombreL">${persona.nombre} </div>
-                                <div class="col-2" id="correoL ">${persona.correo}</div>
-                                <div class="col-2" id="fonoL ">${persona.fono}</div>
-                                <div class="col-2">         
+                            <div class="container ml-2 row row-cols-1  row-cols-xl-4 border-dark" id="lista" >
+                                <div class="col" id= "nombreL">${persona.nombre} </div>
+                                <div class="col"  id="correoL ">${persona.correo}</div>
+                                <div class="col"  id="fonoL ">${persona.fono}</div>
+                                <div class="col">         
                                     <button id="btn-update" type="button" class="btn btn-secondary m-1" style="width:4rem; --bs-btn-padding-y: .25rem; 
                                     --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
                                     onclick="formModificar(${idx})">Editar</button>
