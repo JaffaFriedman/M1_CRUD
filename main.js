@@ -1,36 +1,40 @@
 /*
-Tarea Aplicación CRUD
+Aplicación CRUD
 Jaffa Friedman
 */
-let tareas=[]
+let personas=[]
  
-function agregarTarea(tarea,descripcion) {
-   if (tareas===null) tareas=[]
-    tarea ={ 
-        tarea: tarea,
-        descripcion: descripcion, }
-        tareas.push(tarea)
+ 
+function agregarPersona(nombre,correo,fono) {
+   if (personas===null) personas=[]
+    persona ={ 
+        nombre: nombre,
+        correo: correo,
+        fono: fono,  }
+        personas.push(persona)
 }
 
 function  titulos() {
     limpiar()
-    const tareaE = document.createElement("div")
-    tareaE.innerHTML = `<div class="border rounded-top bg-secondary text-bg-secondary fw-bold">
-                            <div class="container row " id="lista">
-                                <div class="col-2" id="tarea">Tarea</div>
-                                <div class="col-8" id="descripcion">Descripción</div>
+    const bloque = document.createElement("div")
+    bloque.innerHTML = `<div class="border rounded-top bg-secondary text-bg-secondary fw-bold">
+                            <div class="container ml-2 ml-2 row " id="lista">
+                                <div class="col-6" id="nombre">Nombre</div>
+                                <div class="col-2" id="correo">Correo</div>
+                                <div class="col-2" id="fono">Teléfono</div>
                                 <div class="col-2"> </div>   
                             </div>  
                         </div>`
-        listar.appendChild(tareaE)
+        listar.appendChild(bloque)
 }
 
-function formListar(tarea,idx) {
-    const tareaE = document.createElement("div")
-    tareaE.innerHTML = `<div class="border" id="${idx}">
-                            <div class="container  row row-cols-3 border-dark" id="lista" >
-                                <div class="col-2" id="tareaL">${tarea.tarea} </div>
-                                <div class="col-8" id="descripcionL ">${tarea.descripcion}</div>
+function formListar(persona,idx) {
+    const bloque = document.createElement("div")
+    bloque.innerHTML = `<div class="border" id="${idx}">
+                            <div class="container ml-2 row row-cols-3 border-dark" id="lista" >
+                                <div class="col-6" id= "nombreL">${persona.nombre} </div>
+                                <div class="col-2" id="correoL ">${persona.correo}</div>
+                                <div class="col-2" id="fonoL ">${persona.fono}</div>
                                 <div class="col-2">         
                                     <button id="btn-update" type="button" class="btn btn-secondary m-1" style="width:4rem; --bs-btn-padding-y: .25rem; 
                                     --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
@@ -41,152 +45,211 @@ function formListar(tarea,idx) {
                                 </div>
                             </div>
                       </div>`
-    listar.appendChild(tareaE)
+    listar.appendChild(bloque)
  }
 
    function botonAgregar() {
-        const tareaE =  document.createElement("div")
-        tareaE.innerHTML = `<div class="container">
+        const bloque =  document.createElement("div")
+        bloque.innerHTML = `<div class="container">
                                 <div class="aling-end " >
                                     <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
-                                    onclick="formIngreso()">Nueva Tarea</button>
+                                    onclick="formIngreso()">Nuevo Cliente</button>
                                 </div>
                             </div>`
-        boton.appendChild(tareaE)
+        boton.appendChild(bloque)
    }
 
-   function listarTareas() {  
+   function listarPersonas() {  
             titulos()
-            tareas.forEach((v,idx)=>formListar(v,idx))
+            personas.forEach((v,idx)=>formListar(v,idx))
             botonAgregar()
    }
 
    function formModificar(idx ) {  
         limpiar()
-        const tareaE = document.createElement("div")
-        tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
-                            <div class="card-header bg-secondary text-bg-secondary">Modificar</div>
-                                <div class="card-body">
-                                <form id="formModificar">
-                                    <div class="mt-2" id="tarea">
-                                        <label for="tarea" class="form-label fw-bold">Tarea</label>
-                                        <input  class="form-control" id="tareaM" value="${tareas[idx].tarea}"> </input>                               
+        const bloque = document.createElement("div")
+        bloque.innerHTML = `<div class="card text-bg-light mb-3 ml-2 fw-bold" >
+                                <div class="card-header bg-secondary text-bg-secondary">Modificar</div>
+                                    <div class="card-body">
+                                    <form id="formModificar">
+                                        <fieldset enabled>
+                                            <div class="mt-2" id= "nombre">
+                                                <label for= "nombre" class="form-label fw-bold">Nombre</label>
+                                                <input  class="form-control" id="nombreM"  type="text" value="${personas[idx].nombre}" > </input>                               
+                                            </div>
+                                            <div class="mt-2" id="correo" >
+                                                <label for="correo" class="form-label fw-bold">Correo</label>
+                                                <input  class="form-control" id="correoM" type="email" value="${personas[idx].correo}" > </input>                               
+                                            </div>
+                                                <div class="mt-2" id="fono" >
+                                                <label for="fono" class="form-label fw-bold">Teléfono</label>
+                                                <input  class="form-control" id="fonoM"  type="number" value="${personas[idx].fono}" > </input>                               
+                                            </div>
+                                        </fieldset>
+                                        <div class="aling-end mt-4 mb-4" >
+                                            <button id="btn-create" type="button" class="btn btn-outline-secondary" 
+                                            onclick="refrescar()">Cancelar</button>
+                                            <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
+                                             onclick="modificarPersona(${idx})">Actualizar</button>
+                                        </div>
+                                    </form>
                                     </div>
-                                    <div class="mt-2" id="descripcion" >
-                                        <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                                        <input  class="form-control" id="descripcionM"  rows="3" value="${tareas[idx].descripcion}"> </input>                               
-                                    </div>
-                                    <div class="aling-end mt-4 mb-4" >
-                                        <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                        onclick="refrescar()">Cancelar</button>
-                                        <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
-                                        onclick="modificarTarea(${idx})">Actualizar</button>
-                                    </div>
-                                </form>
                                 </div>
                         </div>`
-        modificar.appendChild(tareaE)
+        modificar.appendChild(bloque)
    }
 
-   function modificarTarea(idx){ 
-        const tarea=document.querySelector("#tareaM")
-        const descripcion=document.querySelector("#descripcionM")
-        if (validar(tarea,descripcion)) 
-        {   tareas[idx].tarea=tarea.value
-            tareas[idx].descripcion=descripcion.value
+   function modificarPersona(idx){ 
+        const nombre=document.querySelector("#nombreM")
+        const correo=document.querySelector("#correoM")
+        const fono=document.querySelector("#fonoM")
+        nombre.value=nombre.value.trim()
+        if (validar(nombre.value,correo.value,fono.value)) 
+        {   personas[idx].nombre=nombre.value
+            personas[idx].correo=correo.value
+            personas[idx].fono=fono.value
             grabarStorage()
        }
    }
 
    function formEliminar(idx) { 
     limpiar()
-    const tareaE = document.createElement("div")
-    tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
+    const bloque = document.createElement("div")
+    bloque.innerHTML = `<div class="card text-bg-light mb-3 ml-2 fw-bold" >
                             <div class="card-header bg-secondary text-bg-secondary">Confirme para eliminar</div>
                                 <div class="card-body"
                                 <form id="formEliminar">
-                                    <div class="mt-2" id="tareaE">
-                                        <label for="tarea" class="form-label fw-bold">Tarea</label>
-                                        <input  class="form-control" id="tarea"  value="${tareas[idx].tarea}" > </input>                                
-                                    </div>
-                                    <div class="mt-2" id="descripcionE >
-                                        <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                                        <input  class="form-control" id="descripcion"  rows="3"  value="${tareas[idx].descripcion}"> </input>                               
-                                    </div>
-                                    <div class="aling-end mt-4 mb-4" >
-                                        <button id="btn-create" type="button" class="btn btn-outline-secondary" 
-                                        onclick="refrescar()">Cancelar</button>
-                                        <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
-                                        onclick="eliminarTarea(${idx})">Confirmar</button>
-                                    </div>
-                                    </form>
-                                </div>
+                                        <fieldset disabled>
+                                            <div class="mt-2" id= "nombreE">
+                                                <label for= "nombre" class="form-label fw-bold">Nombre</label>
+                                                <input  class="form-control" id= "nombre"  value="${personas[idx].nombre}" > </input>                                
+                                            </div>
+                                            <div class="mt-2" id="correoE >
+                                                <label for="correo" class="form-label fw-bold">Correo</label>
+                                                <input  class="form-control" id="correo"   value="${personas[idx].correo}"> </input>                               
+                                            </div>
+                                            <div class="mt-2" id="fonoE >
+                                                <label for="fono" class="form-label fw-bold">Teléfono</label>
+                                                <input  class="form-control" id="fono"    value="${personas[idx].fono}"> </input>                               
+                                            </div>
+                                        </fieldset>
+                                        <div class="aling-end mt-4 mb-4" >
+                                            <button id="btn-create" type="button" class="btn btn-outline-secondary" 
+                                            onclick="refrescar()">Cancelar</button>
+                                            <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient" 
+                                            onclick="eliminarPersona(${idx})">Confirmar</button>
+                                        </div>
+                                 
+                                </form>
+                            </div>
                         </div>`
-        eliminar.appendChild(tareaE) 
+        eliminar.appendChild(bloque) 
    }
 
-   function eliminarTarea(idx){
-        tareas.splice(idx,1)
+   function eliminarPersona(idx){
+        personas.splice(idx,1)
         grabarStorage()
     }
 
    function formIngreso() {
      limpiar()
-     const tareaE = document.createElement("div")
-     tareaE.innerHTML = `<div class="card text-bg-light mb-3 fw-bold" >
+     const bloque = document.createElement("div")
+     bloque.innerHTML = `<div class="card text-bg-light mb-3 ml-2 fw-bold" >
                              <div class="card-header bg-secondary text-bg-secondary">Ingresar</div>
                              <div class="card-body">
                              <form id="formIngresar">
-                                 <div class="mt-2" id="tarea">
-                                     <label for="tarea" class="form-label fw-bold">Tarea</label>
-                                     <input  class="form-control" type="text" id="tareaI"  name="tareaI" placeholder="ingrese la tarea" > </input>
+                               <fieldset enabled>
+                                 <div class="mt-2" id= "nombre">
+                                     <label for= "nombre" class="form-label fw-bold">Nombre</label>
+                                     <input  class="form-control" type="text" id= "nombreI"  name= "nombreI" placeholder="Ingrese el nombre" > </input>
                                  </div>
-                                 <div class="mt-2" id="descripcion" >
-                                     <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                                     <input  class="form-control" type="text" id="descripcionI" name="descripcionI" placeholder="ingrese la descrpción de la tarea"  rows="3" > </input>
+                                 <div class="mt-2" id="correo" >
+                                     <label for="correo" class="form-label fw-bold">Correo</label>
+                                     <input  class="form-control" type="email" id="correoI" name="correoI" placeholder="Ingrese el correo"   > </input>
                                  </div>
+                                 <div class="mt-2" id="fono" >
+                                    <label for="fono" class="form-label fw-bold">Teléfono</label>
+                                    <input  class="form-control"  id="fonoI"  type="number" name="fonoI" placeholder="Ingrese el teléfono"   > </input>
+                                </div>
                                  <div class="aling-end mt-4 mb-4" >
                                      <button id="btn-create" type="button" class="btn btn-outline-secondary" 
                                      onclick="refrescar()">Cancelar</button>
                                      <button id="btn-create" type="button" class="btn btn-secondary .bg-gradient;"  
-                                     onclick="ingresarTarea()">Agregar</button>
+                                     onclick="ingresarPersona()">Agregar</button>
                                  </div>
                                  </form>
                              </div>
                          </div>`
-     ingresar.appendChild(tareaE)
+     ingresar.appendChild(bloque)
    }
  
-    function ingresarTarea(){  
-     const tarea=document.querySelector("#tareaI")
-     const descripcion=document.querySelector("#descripcionI")
-     if (validar(tarea,descripcion)) 
-     {  agregarTarea(tarea.value, descripcion.value);
+ 
+   function ingresarPersona(){  
+     const nombre=document.querySelector("#nombreI")
+     const correo=document.querySelector("#correoI")
+     const fono=document.querySelector("#fonoI")
+     nombre.value=nombre.value.trim()
+     if (validar(nombre.value,correo.value,fono.value)) 
+     {  agregarPersona(nombre.value, correo.value,  fono.value);
         grabarStorage()
     }
-  }
+} 
+ 
+function validar(nombre,correo,fono)
+{  
+    if (!nombre&&!correo&&!fono) { 
+        alert("Debe ingresar todos los datos")  
+        return false  }
+   if (!correo&&!fono) { 
+       alert("Le falta ingresar el correo y el teléfono")
+       return false  }
+   if (!nombre&&!correo) { 
+       alert("Le falta ingresar el nombre y el correo")
+       return false  }
+   if (!nombre&&!fono) { 
+        alert("Le falta ingresar el nombre y el teléfono")
+        return false  }
+  if (!fono&&!correo) { 
+        alert("Le falta ingresar el correo y el teléfono")
+        return false  }
+   if (!nombre)  { 
+       alert("Le falta ingresar el nombre")  
+       return false  }
+   if (!correo)  { 
+       alert("Le falta ingresar el correo")  
+       return false  }
+    if (!validaCorreo(correo))  { 
+        alert("Formato de Correo inválido, debe tener una @, al menos 1 caracter despues de @, luego un punto y al menos un caracter despues del punto")  
+        return false  }
+   if (!fono)   { 
+       alert("Debe ingresar el teléfono")
+        return false  }       
+   if (fono.length<8){ 
+           alert("Al telefono le faltan digitos, el largo minimo es 8")
+           return false  }  
+   if (fono.length>9){ 
+           alert("Al telefono le sobran digitos, el largo maximo es 9")
+           return false  }  
 
- function validar(tarea,descripcion)  {  
-    if(!tarea.value&&!descripcion.value)
-      {
-        alert("Debe ingresar la tarea y su descripcion")
-        return false
-      }
-      if(!tarea.value)
-      {
-        alert("Debe ingresar la tarea")
-        return false
-      }
-      if(!descripcion.value)
-      {
-        alert("Debe ingresar la descripcion")
-        return false
-      }
-    return true
+   return true
 }
-
-
- function borrarSeccion(seccion){
+function validaCorreo(correo)
+/*
+Validacion simple del correo
+*/
+{ const i= correo.indexOf("@")
+  const k= correo.lastIndexOf("@")
+  const j= correo.lastIndexOf(".") 
+   if(i!=k) //mas de 1 @
+    return false
+  if (i < 1 ) // no hay nada antes de la @
+     return false
+  if (j <= i+1 || j>=correo.length-1)  // no tiene un punto despues de la @ o no tiene nada despues del punto
+     return false
+  return true
+}
+ 
+  function borrarSeccion(seccion){
         const borrar=document.getElementById(seccion) 
         borrar.innerHTML = "" 
    }
@@ -202,28 +265,28 @@ function formListar(tarea,idx) {
    function leerStorage()
 
    {   
-       const tareasJ = localStorage.getItem('tareas');
-        tareas=JSON.parse(tareasJ)      
+       const personasJ = localStorage.getItem('personas');
+        personas=JSON.parse(personasJ)      
    }
 
    function grabarStorage()
    {
-        const tareasJ = JSON.stringify(tareas);
-        localStorage.setItem('tareas', tareasJ);
+        const personasJ = JSON.stringify(personas);
+        localStorage.setItem('personas', personasJ);
         refrescar()
    }
    
    function refrescar()  {
         leerStorage() 
-        if (tareas===null)  //cuando no ha sido grabado nunca el el Storage 
+        if (personas===null)  //cuando no ha sido grabado nunca el el Storage 
         {   
             titulos()
             botonAgregar() 
         }
-        else listarTareas()
+        else listarPersonas()
    }
 
    window.onload = function() {
     refrescar()
-  }
-
+}
+ 
