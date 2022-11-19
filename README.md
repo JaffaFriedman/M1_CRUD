@@ -18,3 +18,6 @@ si hay datos aparezca el de listar y el boton
 
  ### Cancelar la operacion
  Todos los formularios tienen la opción de cancelar, donde limpiara la pantalla.
+ 
+  ### Validación de campos
+ Se valida que todos los campos esten ingresados, pero no se validan los formatos. Para el telefono solo deja ingresar números
