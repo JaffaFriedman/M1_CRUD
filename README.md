@@ -5,6 +5,8 @@
  Esta aplicación es para ejercitar las operaciones CRUD (create, read, update, delete) en un formulario simple
  El formulario es para una lista de clientes y tiene el nombre, correo y teléfono. Todos los datos son obligatorios
 
+![Captura](https://user-images.githubusercontent.com/112987800/213326097-035446f5-fc62-4bbb-be0c-ad87cf5b0d49.JPG)
+
  ## Forma de implementar
 En el HTML se creo el header y las 4 secciones solicitadas, las cuales seran modificadas con el javascript
 1) listar
