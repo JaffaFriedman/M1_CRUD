@@ -1,5 +1,5 @@
 # M1_CRUD
- Aplicación Crud
+ Aplicación Crud que permite mantener los datos de una lista de clientes.
  
  ## Objetivo
  Esta aplicación es para ejercitar las operaciones CRUD (create, read, update, delete) en un formulario simple
